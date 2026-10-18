@@ -1,0 +1,158 @@
+:root {
+  --bg: #0b1220;
+  --bg-glow: #1b2a4a;
+  --card: #ffffff12;
+  --card-hover: #ffffff1f;
+  --border: #ffffff22;
+  --text: #f4f7fb;
+  --muted: #a9b4c7;
+  --accent: #0a66c2;      /* azul do LinkedIn */
+  --accent-hover: #1280e6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% -10%, var(--bg-glow), transparent 60%),
+    var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 56px;
+}
+
+main { width: 100%; max-width: 440px; }
+
+header { text-align: center; margin-bottom: 28px; }
+
+.logo {
+  width: 84px; height: 84px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #6ea8ff);
+  display: grid; place-items: center;
+  font-size: 30px; font-weight: 700;
+  box-shadow: 0 8px 24px #0a66c255;
+  overflow: hidden;
+  position: relative;
+}
+
+h1 { font-size: 1.5rem; margin-bottom: 6px; }
+.subtitle { color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+
+.section-label {
+  font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin: 0 4px 10px;
+}
+
+.members { display: flex; flex-direction: column; gap: 12px; }
+
+.member {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-decoration: none; color: inherit;
+  transition: background .15s, transform .15s;
+}
+.member:hover, .member:focus-visible {
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Avatar: as iniciais ficam atrás; se existir foto, ela cobre as iniciais */
+.avatar {
+  flex: none;
+  position: relative;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: #ffffff1a;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 1.05rem;
+  overflow: hidden;
+}
+.avatar img,
+.logo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.info { flex: 1; min-width: 0; }
+.name { font-weight: 600; font-size: 1rem; }
+.role { color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
+
+.in-badge {
+  flex: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700; font-size: 0.8rem;
+  padding: 7px 12px;
+  border-radius: 999px;
+}
+.member:hover .in-badge { background: var(--accent-hover); }
+
+footer {
+  text-align: center; color: var(--muted);
+  font-size: 0.8rem; margin-top: 32px;
+}
+
+/* ===== Robozinho ===== */
+.robot {
+  display: block;
+  width: 120px; height: 120px;
+  margin: 0 auto 12px;
+  overflow: visible;
+  filter: drop-shadow(0 10px 16px #0a66c244);
+  animation: flutuar 3.2s ease-in-out infinite;
+}
+.robot-head   { fill: url(#rg-head); }
+.robot-body   { fill: url(#rg-body); }
+.robot-limb   { fill: #c4d8f8; }
+.robot-gloss  { fill: #fff; opacity: .6; }
+.robot-ear    { fill: var(--accent); }
+.robot-light  { fill: var(--accent); }
+.robot-stem   { fill: none; stroke: #9db9e6; stroke-width: 3; stroke-linecap: round; }
+.robot-screen { fill: #101a33; }
+.robot-pupil  { fill: #8ee7ff; }
+.robot-shine  { fill: #fff; }
+.robot-cheek  { fill: #ff9fb8; opacity: .85; }
+.robot-mouth  { fill: none; stroke: #8ee7ff; stroke-width: 2.5; stroke-linecap: round; }
+
+.robot-bulb {
+  fill: #6ea8ff;
+  transform-box: fill-box; transform-origin: center;
+  animation: pulsar 1.6s ease-in-out infinite;
+}
+.robot-eye {
+  transform-box: fill-box; transform-origin: center;
+  animation: piscar 4s infinite;
+}
+.robot-arm {
+  transform-origin: 88px 98px;
+  animation: acenar 1.2s ease-in-out infinite;
+}
+
+@keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes pulsar  { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); opacity: .7; } }
+@keyframes piscar  { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes acenar  { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(25deg); } }
+
+/* ===== Cartões entrando em sequência ===== */
+.member { animation: subir .5s ease backwards; }
+.member:nth-child(1) { animation-delay: .1s; }
+.member:nth-child(2) { animation-delay: .2s; }
+.member:nth-child(3) { animation-delay: .3s; }
+.member:nth-child(4) { animation-delay: .4s; }
+.member:nth-child(5) { animation-delay: .5s; }
+.member:nth-child(6) { animation-delay: .6s; }
+@keyframes subir { from { opacity: 0; transform: translateY(16px); } }
+
+/* Respeita quem desativou animações no celular */
+@media (prefers-reduced-motion: reduce) {
+  .robot, .robot-bulb, .robot-eye, .robot-arm, .member { animation: none; }
+}
